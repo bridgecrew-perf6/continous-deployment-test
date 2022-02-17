@@ -41,4 +41,4 @@ jobs:
       run: curl -o- -L https://slss.io/install | bash
 
     - name: Deploy to Lambda Function and API Gateway
-      run: npm serverless deploy
+      run: serverless deploy
