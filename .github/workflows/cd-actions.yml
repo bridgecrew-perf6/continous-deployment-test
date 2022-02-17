@@ -37,4 +37,4 @@ jobs:
       run: npm i -g serverless 
 
     - name: Deploy to Lambda Function and API Gateway
-      run: serverless deploy --stage prod
+      run: serverless deploy --stage prod --region ${{ secrets.AWS_REGION_PROD }}
