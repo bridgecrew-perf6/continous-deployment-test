@@ -14,7 +14,7 @@ const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(event);
     return {
         statusCode: 200,
-        body: JSON.stringify({ message: 'Hello world :)' })
+        body: JSON.stringify({ message: 'Hello world bu in prod :)' })
     };
 });
 exports.handler = handler;
