@@ -12,16 +12,16 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-    steps:
 
+    steps:
     - name: Install AWS CLI
-    uses: unfor19/install-aws-cli-action@v1
-    with:
-      version: 1
-    env:
-      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
-      aws-region: ${{ secrets.AWS_REGION_DEV }}
+      uses: unfor19/install-aws-cli-action@v1
+      with:
+        version: 1
+      env:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+        aws-region: ${{ secrets.AWS_REGION_DEV }}
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
