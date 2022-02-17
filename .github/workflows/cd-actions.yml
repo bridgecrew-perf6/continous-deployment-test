@@ -11,8 +11,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [12.x]
     steps:
+
+    - name: Install AWS CLI
+    uses: unfor19/install-aws-cli-action@v1
+    with:
+      version: 1
+    env:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+      aws-region: ${{ secrets.AWS_REGION_DEV }}
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+        aws-region: ${{ secrets.AWS_REGION_DEV }}
+
     - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
@@ -20,10 +37,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: serverless deploy
-      uses: serverless/github-action@master
-      with:
-        args: deploy
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV}}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV}}
+    - name: Install serverless framework
+      run: curl -o- -L https://slss.io/install | bash
+
+    - name: Deploy to Lambda Function and API Gateway
+      run: npm serverless deploy
