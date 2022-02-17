@@ -35,5 +35,8 @@ jobs:
     - name: Install serverless framework
       run: curl -o- -L https://slss.io/install | bash
 
+    - name: install serverless in project
+      run: npm i -g serverless 
+
     - name: Deploy to Lambda Function and API Gateway
-      run: npx serverless deploy
+      run: serverless deploy
